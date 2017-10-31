@@ -1,0 +1,85 @@
+﻿body {
+    background-color:rgb(243,243,243);
+    height:100%;
+    font-family:Consolas,Arial, Helvetica, sans-serif;
+    font-size:13px;
+    color:#676a6c;
+    overflow-x:hidden;
+    margin:0;
+}
+
+.middle-box {
+    max-width:400px;
+    z-index:100;
+    margin:0 auto;
+    padding-top:40px;
+}
+
+.loginscreen.middle-box {
+    width:300px;
+}
+
+.fadeInDown {
+    animation-name:fadeInDown;
+}
+
+.animated {
+    animation-duration:1s;
+    animation-fill-mode:both;
+}
+
+.text-center {
+    text-align:center;
+}
+
+.form-group {
+    margin-bottom:15px;
+}
+
+.form-control {
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    display: block;
+    padding: 1.5% 3%;
+    transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    width: 94%;
+    font-size: 14px;
+    box-shadow: none;
+    line-height: 1.42857143;
+    height: 20px;
+}
+
+.m-b {
+   margin-bottom:15px;
+}
+
+.full-width {
+    width:100%!important;
+}
+
+.block {
+    display:block;
+}
+
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFF;
+}
+
+.btn {
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    width:100%;
+}

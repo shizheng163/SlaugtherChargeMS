@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SlaughterChargeMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DB_ArrearsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
+          <Property Name="FK_UserInfo" Type="int" Nullable="false" />
+          <Property Name="Money" Type="int" Nullable="false" />
+          <Property Name="TransTime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EnterTime" Type="datetime" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DB_ButcherProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
+          <Property Name="FK_Reason" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TransTime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EnterTime" Type="datetime" Nullable="false" />
+          <Property Name="TransactionObject" Type="varchar(max)" />
+          <Property Name="UpdateNum" Type="int" Nullable="false" />
+          <Property Name="SingleAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DB_CreditDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="smallint" Nullable="false" />
+          <Property Name="FK_UserInfo" Type="int" Nullable="false" />
+          <Property Name="Money" Type="int" Nullable="false" />
+          <Property Name="TransTime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EnterTime" Type="datetime" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DB_DictionaryCategory">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="OperatorTime" Type="datetime" />
+          <Property Name="OperatorCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="OperatorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CanModify" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DB_DictionaryInfo">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FK_DictionaryCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OperatorCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OperatorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OperatorTime" Type="datetime" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DB_Manager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Menus" Type="nvarchar(max)" />
+          <Property Name="OperatorName" Type="nvarchar" MaxLength="64" />
+          <Property Name="OperatorTime" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="DB_Menus">
+          <Key>
+            <PropertyRef Name="PK_Code" />
+          </Key>
+          <Property Name="PK_Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FK_PCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Url" Type="nvarchar" MaxLength="100" />
+          <Property Name="IconCls" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MenuType" Type="int" Nullable="false" />
+          <Property Name="Orders" Type="int" />
+        </EntityType>
+        <EntityType Name="DB_Sell">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchNumber" Type="int" Nullable="false" />
+          <Property Name="QuantityDate" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransactionObject" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FK_SellCategory" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="QuantityNum" Type="int" Nullable="false" />
+          <Property Name="RemainderNum" Type="int" Nullable="false" />
+          <Property Name="QuantitySpend" Type="float" Nullable="false" />
+          <Property Name="OtherSpend" Type="float" Nullable="false" />
+          <Property Name="CurIncome" Type="float" Nullable="false" />
+          <Property Name="CurProfit" Type="float" Nullable="false" />
+          <Property Name="EnterTime" Type="datetime" Nullable="false" />
+          <Property Name="FK_Entertor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DB_SellDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Sell" Type="int" Nullable="false" />
+          <Property Name="TransTime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EnterTime" Type="datetime" Nullable="false" />
+          <Property Name="TransactionObject" Type="nvarchar(max)" />
+          <Property Name="FK_TranscationReason" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TransNum" Type="int" Nullable="false" />
+          <Property Name="TransLaterNum" Type="int" Nullable="false" />
+          <Property Name="TransCost" Type="float" Nullable="false" />
+          <Property Name="SpendType" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DB_UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_DB_DictionaryInfo_DB_ButcherProcess">
+          <End Role="DB_DictionaryInfo" Type="Self.DB_DictionaryInfo" Multiplicity="1" />
+          <End Role="DB_ButcherProcess" Type="Self.DB_ButcherProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryInfo">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_ButcherProcess">
+              <PropertyRef Name="FK_Reason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_DictionaryInfo_DB_DictionaryCategory">
+          <End Role="DB_DictionaryCategory" Type="Self.DB_DictionaryCategory" Multiplicity="1" />
+          <End Role="DB_DictionaryInfo" Type="Self.DB_DictionaryInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryCategory">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_DictionaryInfo">
+              <PropertyRef Name="FK_DictionaryCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_DictionaryInfo_DB_Sell">
+          <End Role="DB_DictionaryInfo" Type="Self.DB_DictionaryInfo" Multiplicity="1" />
+          <End Role="DB_Sell" Type="Self.DB_Sell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryInfo">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_Sell">
+              <PropertyRef Name="FK_SellCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_DictionaryInfo_DB_SellDetail">
+          <End Role="DB_DictionaryInfo" Type="Self.DB_DictionaryInfo" Multiplicity="1" />
+          <End Role="DB_SellDetail" Type="Self.DB_SellDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryInfo">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_SellDetail">
+              <PropertyRef Name="FK_TranscationReason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_Manager_DB_Sell">
+          <End Role="DB_Manager" Type="Self.DB_Manager" Multiplicity="1" />
+          <End Role="DB_Sell" Type="Self.DB_Sell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_Manager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_Sell">
+              <PropertyRef Name="FK_Entertor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_MENUS_PCode">
+          <End Role="DB_Menus" Type="Self.DB_Menus" Multiplicity="0..1" />
+          <End Role="DB_Menus1" Type="Self.DB_Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_Menus">
+              <PropertyRef Name="PK_Code" />
+            </Principal>
+            <Dependent Role="DB_Menus1">
+              <PropertyRef Name="FK_PCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_Sell_DB_SellDetail">
+          <End Role="DB_Sell" Type="Self.DB_Sell" Multiplicity="1" />
+          <End Role="DB_SellDetail" Type="Self.DB_SellDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_Sell">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_SellDetail">
+              <PropertyRef Name="FK_Sell" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_UserInfo_DB_ArrearsDetail">
+          <End Role="DB_UserInfo" Type="Self.DB_UserInfo" Multiplicity="1" />
+          <End Role="DB_ArrearsDetail" Type="Self.DB_ArrearsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_ArrearsDetail">
+              <PropertyRef Name="FK_UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_UserInfo_DB_CreditDetail">
+          <End Role="DB_UserInfo" Type="Self.DB_UserInfo" Multiplicity="1" />
+          <End Role="DB_CreditDetail" Type="Self.DB_CreditDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_CreditDetail">
+              <PropertyRef Name="FK_UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SlaughterChargeMSModelStoreContainer">
+          <EntitySet Name="DB_ArrearsDetail" EntityType="Self.DB_ArrearsDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_ButcherProcess" EntityType="Self.DB_ButcherProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_CreditDetail" EntityType="Self.DB_CreditDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_DictionaryCategory" EntityType="Self.DB_DictionaryCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_DictionaryInfo" EntityType="Self.DB_DictionaryInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_Manager" EntityType="Self.DB_Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_Menus" EntityType="Self.DB_Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_Sell" EntityType="Self.DB_Sell" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_SellDetail" EntityType="Self.DB_SellDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_UserInfo" EntityType="Self.DB_UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_ButcherProcess" Association="Self.FK_DB_DictionaryInfo_DB_ButcherProcess">
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+            <End Role="DB_ButcherProcess" EntitySet="DB_ButcherProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_DictionaryCategory" Association="Self.FK_DB_DictionaryInfo_DB_DictionaryCategory">
+            <End Role="DB_DictionaryCategory" EntitySet="DB_DictionaryCategory" />
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_Sell" Association="Self.FK_DB_DictionaryInfo_DB_Sell">
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+            <End Role="DB_Sell" EntitySet="DB_Sell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_SellDetail" Association="Self.FK_DB_DictionaryInfo_DB_SellDetail">
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+            <End Role="DB_SellDetail" EntitySet="DB_SellDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_Manager_DB_Sell" Association="Self.FK_DB_Manager_DB_Sell">
+            <End Role="DB_Manager" EntitySet="DB_Manager" />
+            <End Role="DB_Sell" EntitySet="DB_Sell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_MENUS_PCode" Association="Self.FK_DB_MENUS_PCode">
+            <End Role="DB_Menus" EntitySet="DB_Menus" />
+            <End Role="DB_Menus1" EntitySet="DB_Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_Sell_DB_SellDetail" Association="Self.FK_DB_Sell_DB_SellDetail">
+            <End Role="DB_Sell" EntitySet="DB_Sell" />
+            <End Role="DB_SellDetail" EntitySet="DB_SellDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_UserInfo_DB_ArrearsDetail" Association="Self.FK_DB_UserInfo_DB_ArrearsDetail">
+            <End Role="DB_UserInfo" EntitySet="DB_UserInfo" />
+            <End Role="DB_ArrearsDetail" EntitySet="DB_ArrearsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_UserInfo_DB_CreditDetail" Association="Self.FK_DB_UserInfo_DB_CreditDetail">
+            <End Role="DB_UserInfo" EntitySet="DB_UserInfo" />
+            <End Role="DB_CreditDetail" EntitySet="DB_CreditDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SlaughterChargeMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DB_Manager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Menus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorTime" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DB_Sell" Relationship="SlaughterChargeMSModel.FK_DB_Manager_DB_Sell" FromRole="DB_Manager" ToRole="DB_Sell" />
+        </EntityType>
+        <EntityType Name="DB_Menus">
+          <Key>
+            <PropertyRef Name="PK_Code" />
+          </Key>
+          <Property Name="PK_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FK_PCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IconCls" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MenuType" Type="Int32" Nullable="false" />
+          <Property Name="Orders" Type="Int32" />
+          <NavigationProperty Name="DB_Menus1" Relationship="Self.FK_DB_MENUS_PCode" FromRole="DB_Menus" ToRole="DB_Menus1" />
+          <NavigationProperty Name="DB_Menus2" Relationship="Self.FK_DB_MENUS_PCode" FromRole="DB_Menus1" ToRole="DB_Menus" />
+        </EntityType>
+        <Association Name="FK_DB_MENUS_PCode">
+          <End Role="DB_Menus" Type="Self.DB_Menus" Multiplicity="0..1" />
+          <End Role="DB_Menus1" Type="Self.DB_Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_Menus">
+              <PropertyRef Name="PK_Code" />
+            </Principal>
+            <Dependent Role="DB_Menus1">
+              <PropertyRef Name="FK_PCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DB_Manager" EntityType="Self.DB_Manager" />
+          <EntitySet Name="DB_Menus" EntityType="Self.DB_Menus" />
+          <AssociationSet Name="FK_DB_MENUS_PCode" Association="Self.FK_DB_MENUS_PCode">
+            <End Role="DB_Menus" EntitySet="DB_Menus" />
+            <End Role="DB_Menus1" EntitySet="DB_Menus" />
+          </AssociationSet>
+          <EntitySet Name="DB_DictionaryCategory" EntityType="SlaughterChargeMSModel.DB_DictionaryCategory" />
+          <EntitySet Name="DB_DictionaryInfo" EntityType="SlaughterChargeMSModel.DB_DictionaryInfo" />
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_DictionaryCategory" Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_DictionaryCategory">
+            <End Role="DB_DictionaryCategory" EntitySet="DB_DictionaryCategory" />
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+          </AssociationSet>
+          <EntitySet Name="DB_Sell" EntityType="SlaughterChargeMSModel.DB_Sell" />
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_Sell" Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_Sell">
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+            <End Role="DB_Sell" EntitySet="DB_Sell" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_Manager_DB_Sell" Association="SlaughterChargeMSModel.FK_DB_Manager_DB_Sell">
+            <End Role="DB_Manager" EntitySet="DB_Manager" />
+            <End Role="DB_Sell" EntitySet="DB_Sell" />
+          </AssociationSet>
+          <EntitySet Name="DB_SellDetail" EntityType="SlaughterChargeMSModel.DB_SellDetail" />
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_SellDetail" Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_SellDetail">
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+            <End Role="DB_SellDetail" EntitySet="DB_SellDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_Sell_DB_SellDetail" Association="SlaughterChargeMSModel.FK_DB_Sell_DB_SellDetail">
+            <End Role="DB_Sell" EntitySet="DB_Sell" />
+            <End Role="DB_SellDetail" EntitySet="DB_SellDetail" />
+          </AssociationSet>
+          <EntitySet Name="DB_ButcherProcess" EntityType="SlaughterChargeMSModel.DB_ButcherProcess" />
+          <AssociationSet Name="FK_DB_DictionaryInfo_DB_ButcherProcess" Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_ButcherProcess">
+            <End Role="DB_DictionaryInfo" EntitySet="DB_DictionaryInfo" />
+            <End Role="DB_ButcherProcess" EntitySet="DB_ButcherProcess" />
+          </AssociationSet>
+          <EntitySet Name="DB_UserInfo" EntityType="SlaughterChargeMSModel.DB_UserInfo" />
+          <EntitySet Name="DB_ArrearsDetail" EntityType="SlaughterChargeMSModel.DB_ArrearsDetail" />
+          <AssociationSet Name="FK_DB_UserInfo_DB_ArrearsDetail" Association="SlaughterChargeMSModel.FK_DB_UserInfo_DB_ArrearsDetail">
+            <End Role="DB_UserInfo" EntitySet="DB_UserInfo" />
+            <End Role="DB_ArrearsDetail" EntitySet="DB_ArrearsDetail" />
+          </AssociationSet>
+          <EntitySet Name="DB_CreditDetail" EntityType="SlaughterChargeMSModel.DB_CreditDetail" />
+          <AssociationSet Name="FK_DB_UserInfo_DB_CreditDetail" Association="SlaughterChargeMSModel.FK_DB_UserInfo_DB_CreditDetail">
+            <End Role="DB_UserInfo" EntitySet="DB_UserInfo" />
+            <End Role="DB_CreditDetail" EntitySet="DB_CreditDetail" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DB_DictionaryCategory">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorTime" Type="DateTime" Precision="3" />
+          <Property Name="OperatorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CanModify" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DB_DictionaryInfo" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_DictionaryCategory" FromRole="DB_DictionaryCategory" ToRole="DB_DictionaryInfo" />
+        </EntityType>
+        <EntityType Name="DB_DictionaryInfo">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FK_DictionaryCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DB_DictionaryCategory" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_DictionaryCategory" FromRole="DB_DictionaryInfo" ToRole="DB_DictionaryCategory" />
+          <NavigationProperty Name="DB_Sell" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_Sell" FromRole="DB_DictionaryInfo" ToRole="DB_Sell" />
+          <NavigationProperty Name="DB_SellDetail" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_SellDetail" FromRole="DB_DictionaryInfo" ToRole="DB_SellDetail" />
+          <NavigationProperty Name="DB_ButcherProcess" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_ButcherProcess" FromRole="DB_DictionaryInfo" ToRole="DB_ButcherProcess" />
+        </EntityType>
+        <Association Name="FK_DB_DictionaryInfo_DB_DictionaryCategory">
+          <End Type="SlaughterChargeMSModel.DB_DictionaryCategory" Role="DB_DictionaryCategory" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_DictionaryInfo" Role="DB_DictionaryInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryCategory">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_DictionaryInfo">
+              <PropertyRef Name="FK_DictionaryCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DB_Sell">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchNumber" Type="Int32" Nullable="false" />
+          <Property Name="QuantityDate" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionObject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FK_SellCategory" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="QuantityNum" Type="Int32" Nullable="false" />
+          <Property Name="RemainderNum" Type="Int32" Nullable="false" />
+          <Property Name="QuantitySpend" Type="Double" Nullable="false" />
+          <Property Name="OtherSpend" Type="Double" Nullable="false" />
+          <Property Name="CurIncome" Type="Double" Nullable="false" />
+          <Property Name="CurProfit" Type="Double" Nullable="false" />
+          <Property Name="EnterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_Entertor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DB_DictionaryInfo" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_Sell" FromRole="DB_Sell" ToRole="DB_DictionaryInfo" />
+          <NavigationProperty Name="DB_Manager" Relationship="SlaughterChargeMSModel.FK_DB_Manager_DB_Sell" FromRole="DB_Sell" ToRole="DB_Manager" />
+          <NavigationProperty Name="DB_SellDetail" Relationship="SlaughterChargeMSModel.FK_DB_Sell_DB_SellDetail" FromRole="DB_Sell" ToRole="DB_SellDetail" />
+        </EntityType>
+        <Association Name="FK_DB_DictionaryInfo_DB_Sell">
+          <End Type="SlaughterChargeMSModel.DB_DictionaryInfo" Role="DB_DictionaryInfo" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_Sell" Role="DB_Sell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryInfo">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_Sell">
+              <PropertyRef Name="FK_SellCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_Manager_DB_Sell">
+          <End Type="SlaughterChargeMSModel.DB_Manager" Role="DB_Manager" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_Sell" Role="DB_Sell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_Manager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_Sell">
+              <PropertyRef Name="FK_Entertor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DB_SellDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Sell" Type="Int32" Nullable="false" />
+          <Property Name="TransTime" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EnterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionObject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FK_TranscationReason" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TransNum" Type="Int32" Nullable="false" />
+          <Property Name="TransLaterNum" Type="Int32" Nullable="false" />
+          <Property Name="TransCost" Type="Double" Nullable="false" />
+          <Property Name="SpendType" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="DB_DictionaryInfo" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_SellDetail" FromRole="DB_SellDetail" ToRole="DB_DictionaryInfo" />
+          <NavigationProperty Name="DB_Sell" Relationship="SlaughterChargeMSModel.FK_DB_Sell_DB_SellDetail" FromRole="DB_SellDetail" ToRole="DB_Sell" />
+        </EntityType>
+        <Association Name="FK_DB_DictionaryInfo_DB_SellDetail">
+          <End Type="SlaughterChargeMSModel.DB_DictionaryInfo" Role="DB_DictionaryInfo" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_SellDetail" Role="DB_SellDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryInfo">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_SellDetail">
+              <PropertyRef Name="FK_TranscationReason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_Sell_DB_SellDetail">
+          <End Type="SlaughterChargeMSModel.DB_Sell" Role="DB_Sell" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_SellDetail" Role="DB_SellDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_Sell">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_SellDetail">
+              <PropertyRef Name="FK_Sell" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DB_ButcherProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
+          <Property Name="FK_Reason" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TransTime" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EnterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionObject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateNum" Type="Int32" Nullable="false" />
+          <Property Name="SingleAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DB_DictionaryInfo" Relationship="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_ButcherProcess" FromRole="DB_ButcherProcess" ToRole="DB_DictionaryInfo" />
+        </EntityType>
+        <Association Name="FK_DB_DictionaryInfo_DB_ButcherProcess">
+          <End Type="SlaughterChargeMSModel.DB_DictionaryInfo" Role="DB_DictionaryInfo" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_ButcherProcess" Role="DB_ButcherProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_DictionaryInfo">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DB_ButcherProcess">
+              <PropertyRef Name="FK_Reason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DB_UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DB_ArrearsDetail" Relationship="SlaughterChargeMSModel.FK_DB_UserInfo_DB_ArrearsDetail" FromRole="DB_UserInfo" ToRole="DB_ArrearsDetail" />
+          <NavigationProperty Name="DB_CreditDetail" Relationship="SlaughterChargeMSModel.FK_DB_UserInfo_DB_CreditDetail" FromRole="DB_UserInfo" ToRole="DB_CreditDetail" />
+        </EntityType>
+        <EntityType Name="DB_ArrearsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
+          <Property Name="FK_UserInfo" Type="Int32" Nullable="false" />
+          <Property Name="Money" Type="Int32" Nullable="false" />
+          <Property Name="TransTime" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EnterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DB_UserInfo" Relationship="SlaughterChargeMSModel.FK_DB_UserInfo_DB_ArrearsDetail" FromRole="DB_ArrearsDetail" ToRole="DB_UserInfo" />
+        </EntityType>
+        <Association Name="FK_DB_UserInfo_DB_ArrearsDetail">
+          <End Type="SlaughterChargeMSModel.DB_UserInfo" Role="DB_UserInfo" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_ArrearsDetail" Role="DB_ArrearsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_ArrearsDetail">
+              <PropertyRef Name="FK_UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DB_CreditDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int16" Nullable="false" />
+          <Property Name="FK_UserInfo" Type="Int32" Nullable="false" />
+          <Property Name="Money" Type="Int32" Nullable="false" />
+          <Property Name="TransTime" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EnterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DB_UserInfo" Relationship="SlaughterChargeMSModel.FK_DB_UserInfo_DB_CreditDetail" FromRole="DB_CreditDetail" ToRole="DB_UserInfo" />
+        </EntityType>
+        <Association Name="FK_DB_UserInfo_DB_CreditDetail">
+          <End Type="SlaughterChargeMSModel.DB_UserInfo" Role="DB_UserInfo" Multiplicity="1" />
+          <End Type="SlaughterChargeMSModel.DB_CreditDetail" Role="DB_CreditDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DB_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB_CreditDetail">
+              <PropertyRef Name="FK_UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SlaughterChargeMSModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="DB_Manager">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_Manager">
+              <MappingFragment StoreEntitySet="DB_Manager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Menus" ColumnName="Menus" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="OperatorTime" ColumnName="OperatorTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_Menus">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_Menus">
+              <MappingFragment StoreEntitySet="DB_Menus">
+                <ScalarProperty Name="PK_Code" ColumnName="PK_Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FK_PCode" ColumnName="FK_PCode" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IconCls" ColumnName="IconCls" />
+                <ScalarProperty Name="MenuType" ColumnName="MenuType" />
+                <ScalarProperty Name="Orders" ColumnName="Orders" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_DictionaryCategory">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_DictionaryCategory">
+              <MappingFragment StoreEntitySet="DB_DictionaryCategory">
+                <ScalarProperty Name="CanModify" ColumnName="CanModify" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="OperatorTime" ColumnName="OperatorTime" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_DictionaryInfo">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_DictionaryInfo">
+              <MappingFragment StoreEntitySet="DB_DictionaryInfo">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="OperatorTime" ColumnName="OperatorTime" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="FK_DictionaryCategory" ColumnName="FK_DictionaryCategory" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_Sell">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_Sell">
+              <MappingFragment StoreEntitySet="DB_Sell">
+                <ScalarProperty Name="FK_Entertor" ColumnName="FK_Entertor" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="CurProfit" ColumnName="CurProfit" />
+                <ScalarProperty Name="CurIncome" ColumnName="CurIncome" />
+                <ScalarProperty Name="OtherSpend" ColumnName="OtherSpend" />
+                <ScalarProperty Name="QuantitySpend" ColumnName="QuantitySpend" />
+                <ScalarProperty Name="RemainderNum" ColumnName="RemainderNum" />
+                <ScalarProperty Name="QuantityNum" ColumnName="QuantityNum" />
+                <ScalarProperty Name="FK_SellCategory" ColumnName="FK_SellCategory" />
+                <ScalarProperty Name="TransactionObject" ColumnName="TransactionObject" />
+                <ScalarProperty Name="QuantityDate" ColumnName="QuantityDate" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_SellDetail">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_SellDetail">
+              <MappingFragment StoreEntitySet="DB_SellDetail">
+                <ScalarProperty Name="SpendType" ColumnName="SpendType" />
+                <ScalarProperty Name="TransCost" ColumnName="TransCost" />
+                <ScalarProperty Name="TransLaterNum" ColumnName="TransLaterNum" />
+                <ScalarProperty Name="TransNum" ColumnName="TransNum" />
+                <ScalarProperty Name="FK_TranscationReason" ColumnName="FK_TranscationReason" />
+                <ScalarProperty Name="TransactionObject" ColumnName="TransactionObject" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="TransTime" ColumnName="TransTime" />
+                <ScalarProperty Name="FK_Sell" ColumnName="FK_Sell" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_ButcherProcess">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_ButcherProcess">
+              <MappingFragment StoreEntitySet="DB_ButcherProcess">
+                <ScalarProperty Name="SingleAmount" ColumnName="SingleAmount" />
+                <ScalarProperty Name="UpdateNum" ColumnName="UpdateNum" />
+                <ScalarProperty Name="TransactionObject" ColumnName="TransactionObject" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="TransTime" ColumnName="TransTime" />
+                <ScalarProperty Name="FK_Reason" ColumnName="FK_Reason" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_UserInfo">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_UserInfo">
+              <MappingFragment StoreEntitySet="DB_UserInfo">
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_ArrearsDetail">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_ArrearsDetail">
+              <MappingFragment StoreEntitySet="DB_ArrearsDetail">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="TransTime" ColumnName="TransTime" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="FK_UserInfo" ColumnName="FK_UserInfo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_CreditDetail">
+            <EntityTypeMapping TypeName="SlaughterChargeMSModel.DB_CreditDetail">
+              <MappingFragment StoreEntitySet="DB_CreditDetail">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="EnterTime" ColumnName="EnterTime" />
+                <ScalarProperty Name="TransTime" ColumnName="TransTime" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="FK_UserInfo" ColumnName="FK_UserInfo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

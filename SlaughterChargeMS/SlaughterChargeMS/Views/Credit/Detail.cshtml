@@ -1,0 +1,76 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>欠款（拖欠客户）详情查询</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Jquery-easyui/themes/bootstrap/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Jquery-easyui/themes/icon.css" />
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="~/Scripts/Utility/Common.js"></script>
+    <script>
+        window.UserId = @ViewBag.UserId;
+    </script>
+    <script type="text/javascript" src="~/Scripts/Credit/Detail.js"></script>
+    <script>
+        window.onload = function () {
+            $('#loading-mask').fadeOut();
+        }
+    </script>
+    <style>
+        #tb {
+            border:1px solid #888;
+            table-layout:fixed;
+        }
+        #tb td{
+            text-align:center;
+            border:1px solid #888;
+        }
+
+        .thClass {
+            width:60px;
+            background-color:#8DEEEE;
+        }
+    </style>
+</head>
+<body>
+    <!--延迟布局--->
+    <div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+        <div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;">
+            <img src="~/images/loading.gif" align="middle" /> 正在加载中,请稍候...
+        </div>
+    </div>
+
+
+    <div class="easyui-layout" style="width:100%;" fit="true">
+        <div data-options="region:'center',title:'欠款详情（拖欠客户金额）',iconCls:'icon-edit'" style="width:100%;height:100%;">
+            <div id="searchDiv">
+                <fieldset>
+                    <legend>设置查询信息</legend>
+                    <label style="margin-left:10px;margin-right:5px;">查询类型</label><input class="easyui-combobox" style="width:80px;margin-left:5px;" id="StatisticsType">
+                    <div style="display:inline">
+                        <label style="margin-left:10px;" id="labRange">查询区间:</label>
+                        <div id="yearDiv" style="display:inline"><label style="margin-left:10px;margin-right:5px;">年</label><input class="easyui-combobox" style="width:80px;margin-left:5px;" id="StatisticsYear"></div>
+                        <div id="MonthDiv" style="display:inline">
+                            <label style="margin-left:10px;margin-right:5px;">月</label><input class="easyui-combobox" style="width:80px;margin-left:5px;" id="StatisticsMonth">
+                        </div>
+                        <div id="DayDiv" style="display:inline">
+                            <label style="margin-left:10px;margin-right:5px;">日</label><input class="easyui-combobox" style="width:80px;margin-left:5px;" id="StatisticsDay">
+                        </div>
+                        <div style="display:inline"><label style="margin-left:10px;margin-right:10px;">交易类型</label>全部<input name="SearchType" type="radio" value="2" checked="checked" />欠款<input name="SearchType" type="radio" value="0" /> 还款<input name="SearchType" type="radio" value="1" /></div>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-redo" onclick="Search();" style="margin-left:20px;">查询</a>
+                    </div>
+                </fieldset>
+            </div>
+            <table id="grid" style="height:93%;"></table>
+        </div>
+    </div>
+
+</body>
+</html>

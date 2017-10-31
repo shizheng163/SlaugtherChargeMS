@@ -1,0 +1,235 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>屠宰进货批次管理</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Jquery-easyui/themes/bootstrap/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Jquery-easyui/themes/icon.css" />
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="~/Scripts/Utility/Common.js"></script>
+    <script type="text/javascript" src="~/Scripts/Sell/BatchManage.js"></script>
+    <script>
+        window.onload = function () {
+            $('#loading-mask').fadeOut();
+        }
+    </script>
+    <style>
+        #tb {
+            border:1px solid #888;
+            table-layout:fixed;
+        }
+        #tb td{
+            text-align:center;
+            border:1px solid #888;
+        }
+
+        .thClass {
+            width:60px;
+            background-color:#8DEEEE;
+        }
+    </style>
+</head>
+<body>
+    <!--延迟布局--->
+    <div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+        <div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;">
+            <img src="~/images/loading.gif" align="middle" /> 正在加载中,请稍候...
+        </div>
+    </div>
+
+
+
+    <div class="easyui-layout" style="width:100%;" fit="true">
+        <div data-options="region:'center',title:'进货批次管理',iconCls:'icon-edit'" style="width:100%;height:100%;">
+            <table id="grid" style="height:100%;"></table>
+        </div>
+    </div>
+    <div id="AddSellBach" class="easyui-window" style="width:300px;height:350px;" data-options="title:'添加进货批次',iconCls:'icon-add',closed:true,modal:true"
+         minimizable="false" maximizable="false">
+        <table cellspacing="10">
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    批次编号
+                </th>
+                <td>
+                    <input class="easyui-textbox" style="width: 180px;" id="BatchNumber" required="required" disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    采购日期
+                </th>
+                <td>
+                    <input class="easyui-datebox" style="width: 180px;" id="SellDate" required="required" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易对象
+                </th>
+                <td>
+                    <input class="easyui-textbox" style="width: 180px;" id="TranscationObject" required="required"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    货物类型
+                </th>
+                <td>
+                    <input class="easyui-combobox" style="width: 180px;" id="SellCategory" required="required"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    货物数量
+                </th>
+                <td>
+                    <input class="easyui-numberbox" style="width: 180px;" id="QuantityNum" required="required" min="1"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    进货支出
+                </th>
+                <td>
+                    <input class="easyui-numberbox" style="width: 180px;" id="SellSpend" required="required" min="0.01" precision="2"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label style="color: red">注意:进货支出应只填写货物支出,其他支出请在详情管理中添加！否则统计信息可能会出错!</label>
+                </td>
+            </tr>
+        </table>
+
+        <div style="text-align: right; padding-top:10px; margin-bottom: 10px;margin-right:15px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok" onclick="SaveEntity();">确定</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#AddSellBach').dialog('close')">取消</a>
+        </div>
+    </div>
+
+    <div id="SellDetailManageDialog" class="easyui-window" style="width:60%;height:640px;" data-options="title:'添加进货批次',iconCls:'icon-add',closed:true,modal:true"
+         minimizable="false" maximizable="false">
+        <fieldset>
+            <legend>当前批次情况</legend>
+            <table style="width: 100%; height: 20%;" id="tb" cellspacing="0">
+                <tr>
+                    <td class="thClass">当前批次编号</td>
+                    <td id="CurBatchNumber"></td>
+                    <td class="thClass">进货日期</td>
+                    <td id="CurQuantityDate"></td>
+                    <td class="thClass">交易对象</td>
+                    <td id="CurTranscationObject"></td>
+                    <td class="thClass">贩卖类型</td>
+                    <td id="CurSellCategory"></td>
+                    <td class="thClass">进货数量</td>
+                    <td id="CurQuantityNum"></td>
+                    <td class="thClass">剩余数量</td>
+                    <td id="CurRemainderNum"></td>
+                </tr>
+                <tr>
+                    <td class="thClass">进货支出</td>
+                    <td id="CurQuantitySpend"></td>
+                    <td class="thClass">其他支出</td>
+                    <td id="CurOtherSpend"></td>
+                    <td class="thClass">当前收入</td>
+                    <td id="CurIncome"></td>
+                    <td class="thClass">盈利金额</td>
+                    <td id="CurProfit" style="color:red;"></td>
+                    <td class="thClass">录入时间</td>
+                    <td id="CurEnterTime"></td>
+                    <td class="thClass">经办人</td>
+                    <td id="CurOperator"></td>
+                </tr>
+            </table>
+        </fieldset>
+         <table id="gridDetail" style="width:100%;height:500px;margin-top:5px;"></table>
+    </div>
+
+    <div id="AddSellDetailInfo" class="easyui-window" style="width:300px;height:350px;" data-options="title:'添加交易记录',iconCls:'icon-add',closed:true,modal:true"
+         minimizable="false" maximizable="false">
+        <table cellspacing="10">
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易时间
+                </th>
+                <td>
+                    <input class="easyui-datebox" style="width: 180px;" id="TransTime" required="required" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易对象
+                </th>
+                <td>
+                    <input class="easyui-textbox" style="width: 180px;" id="DetailTranscationObject" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易原因
+                </th>
+                <td>
+                    <input class="easyui-combobox" style="width: 180px;" id="TransReason" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易数量
+                </th>
+                <td>
+                    <input class="easyui-numberbox" style="width: 180px;" id="TransNum" required="required" min="0" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易金额
+                </th>
+                <td>
+                    <input class="easyui-numberbox" style="width: 180px;" id="TransCost" required="required" min="0.01" precision="2" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    交易类型
+                </th>
+                <td>
+                    <input class="easyui-combobox" style="width: 180px;" id="SpendType" required="required"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label style="color: red">注意:交易原因不允许选择进货。</label>
+                </td>
+            </tr>
+        </table>
+
+        <div style="text-align: right; padding-top:10px; margin-bottom: 10px;margin-right:15px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok" onclick="SaveDetailEntity();">确定</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#AddSellDetailInfo').dialog('close')">取消</a>
+        </div>
+    </div>
+
+</body>
+</html>

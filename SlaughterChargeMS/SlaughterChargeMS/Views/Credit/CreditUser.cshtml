@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>客户赊欠账目管理</title>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Jquery-easyui/themes/bootstrap/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Jquery-easyui/themes/icon.css" />
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="~/Scripts/Utility/Common.js"></script>
+    <script type="text/javascript" src="~/Scripts/Credit/CreditUser.js"></script>
+    <script>
+        window.onload = function () {
+            $('#loading-mask').fadeOut();
+        }
+    </script>
+    <style>
+        #tb {
+            border:1px solid #888;
+            table-layout:fixed;
+        }
+        #tb td{
+            text-align:center;
+            border:1px solid #888;
+        }
+
+        .thClass {
+            width:60px;
+            background-color:#8DEEEE;
+        }
+    </style>
+</head>
+<body>
+    <!--延迟布局--->
+    <div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+        <div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;">
+            <img src="~/images/loading.gif" align="middle" /> 正在加载中,请稍候...
+        </div>
+    </div>
+
+
+    <div class="easyui-layout" style="width:100%;" fit="true">
+        <div data-options="region:'center',title:'赊欠管理（客户拖欠金额）',iconCls:'icon-edit'" style="width:100%;height:100%;">
+            <table id="grid" style="height:100%;"></table>
+        </div>
+    </div>
+
+    <div id="AddArrearsInfo" class="easyui-window" style="width:300px;height:260px;" data-options="title:'添加欠款信息',iconCls:'icon-add',closed:true,modal:true"
+         minimizable="false" maximizable="false">
+        <table cellspacing="10">
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    用户信息
+                </th>
+                <td>
+                    <input class="easyui-textbox" style="width:100px;" id="UserInfoTextBox" required="required" disabled="disabled" />
+                    <a id="selectUserA" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" onclick="OpenSelectUserDialog();">选择人员</a>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    <label id="dateLab">赊欠日期</label>
+                </th>
+                <td>
+                    <input class="easyui-datebox" style="width:180px;" id="TransTimn" required="required"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="color: red">*</label>
+                    <label id="moneyLab">欠款金额</label>
+                    
+                </th>
+                <td>
+                    <input class="easyui-numberbox" style="width:180px;" id="Money" required="required" min="1" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label style="text-align:right">备注</label>
+                </th>
+                <td>
+                    <input class="easyui-textbox" style="width:180px;" id="remark" required="required"/>
+                </td>
+            </tr>
+            @*<tr>
+                <td colspan="2">
+                    <label style="color: red">注意:姓名不可缺少,联系方式不可重复。联系方式与单位可不填写。</label>
+                </td>
+            </tr>*@
+        </table>
+
+        <div style="text-align: right; padding-top:10px; margin-bottom: 10px;margin-right:15px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok" onclick="SaveEntity();">确定</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#AddArrearsInfo').dialog('close')">取消</a>
+        </div>
+    </div>
+
+    <div id="SelectUserDialog" class="easyui-window" style="width:600px;height:400px;" data-options="title:'客户选择',iconCls:'icon-add',closed:true,modal:true"
+         minimizable="false" maximizable="false">
+           <table id="gridUser" style="width:100%;height:100%;"></table>
+    </div>
+
+</body>
+</html>

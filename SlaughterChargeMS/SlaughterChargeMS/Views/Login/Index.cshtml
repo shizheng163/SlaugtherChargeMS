@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Login/login.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap.min.css.map" rel="stylesheet" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <h3>新民屠宰场财务计费系统登录</h3>
+        <form style="margin-top:15px;" action="/Login/Index" method="post">
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <text><font style="color:red;">@ViewBag.Message</font><br></text>
+            }
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" name="username" placeholder="账号">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+            </div>
+            <button class="btn btn-primary block full-width m-b" type="submit">登 录</button>
+        </form>
+    </div>
+</body>
+</html>

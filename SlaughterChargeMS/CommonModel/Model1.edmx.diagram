@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="343422a765234cf0801afe9e3d475479" Name="Diagram1">
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_Manager" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_Menus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_MENUS_PCode" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_DictionaryCategory" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_DictionaryInfo" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_DictionaryCategory" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_Sell" Width="1.5" PointX="5.25" PointY="4.375" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_Sell" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_Manager_DB_Sell" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_SellDetail" Width="1.5" PointX="7.5" PointY="4.75" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_SellDetail" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_Sell_DB_SellDetail" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_ButcherProcess" Width="1.5" PointX="5.25" PointY="9.125" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_DictionaryInfo_DB_ButcherProcess" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_UserInfo" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_ArrearsDetail" Width="1.5" PointX="7.625" PointY="9" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_UserInfo_DB_ArrearsDetail" />
+        <EntityTypeShape EntityType="SlaughterChargeMSModel.DB_CreditDetail" Width="1.5" PointX="7.625" PointY="1.125" />
+        <AssociationConnector Association="SlaughterChargeMSModel.FK_DB_UserInfo_DB_CreditDetail" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
